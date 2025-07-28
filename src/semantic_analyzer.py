@@ -49,15 +49,20 @@ class SemanticAnalyzer:
         ]
     
     def _load_models(self):
-        """Lazy load ML models."""
+        """Lazy load ML models from local /app/models directory."""
         if self.tokenizer is None:
             try:
-                self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-                self.model = AutoModel.from_pretrained(self.model_name)
+                model_dir = os.environ.get('MODEL_DIR', './models')
+                # Try XLM-Roberta for multilingual, fallback to distilbert
+                if os.path.exists(os.path.join(model_dir, 'xlm-roberta-base')):
+                    self.tokenizer = AutoTokenizer.from_pretrained(os.path.join(model_dir, 'xlm-roberta-base'))
+                    self.model = AutoModel.from_pretrained(os.path.join(model_dir, 'xlm-roberta-base'))
+                else:
+                    self.tokenizer = AutoTokenizer.from_pretrained(os.path.join(model_dir, 'distilbert-base-uncased'))
+                    self.model = AutoModel.from_pretrained(os.path.join(model_dir, 'distilbert-base-uncased'))
                 self.tfidf_vectorizer = TfidfVectorizer(max_features=1000, stop_words='english')
-                
                 if self.debug:
-                    self.logger.info(f"Loaded semantic models: {self.model_name}")
+                    self.logger.info(f"Loaded semantic models from {model_dir}")
             except Exception as e:
                 self.logger.error(f"Failed to load semantic models: {e}")
                 raise

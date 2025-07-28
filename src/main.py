@@ -7,6 +7,12 @@ from pathlib import Path
 from src.heading_detector import HeadingDetector
 
 def process_all_pdfs(input_dir: str, output_dir: str, debug: bool = False):
+    # Set model directory for semantic analyzer
+    model_dir = os.environ.get('MODEL_DIR', '/app/models')
+    if not os.path.exists(model_dir):
+        print(f"Model directory {model_dir} not found. Please ensure the model is downloaded and available.", file=sys.stderr)
+        sys.exit(1)
+    os.environ['MODEL_DIR'] = model_dir
     detector = HeadingDetector(debug=debug)
     input_path = Path(input_dir)
     output_path = Path(output_dir)

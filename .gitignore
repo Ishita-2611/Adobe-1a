@@ -61,3 +61,31 @@ Thumbs.db
 # Misc
 *.bak
 *.tmp
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test cache
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Model files
+models/
+
+# Node (if any)
+node_modules/
+
+# Input/output data (not source)
+input/
+output/

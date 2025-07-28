@@ -23,3 +23,8 @@ python-dotenv==1.0.0
 # Testing
 pytest==7.4.3
 pytest-cov==4.1.0 
+torch
+transformers
+scikit-learn
+numpy
+pdfminer.six 
