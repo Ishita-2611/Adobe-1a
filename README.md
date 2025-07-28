@@ -82,6 +82,3 @@ This system extracts a structured outline (Title, H1, H2, H3 headings with page 
 ## Constraints
 - CPU-only, ≤200MB model, ≤10s for 50-page PDF, no internet at runtime.
 
-## Contact
-- Keep repo private until notified for public release. 
-> **Note:** The `models/` directory is required for local/offline model storage. It is ignored by git and will be populated during Docker build or on first local run. 
